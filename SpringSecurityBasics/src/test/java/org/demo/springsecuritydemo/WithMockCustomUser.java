@@ -1,0 +1,11 @@
+package org.demo.springsecuritydemo;
+
+import org.springframework.security.test.context.support.WithMockUser;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+@WithMockUser(value = "user", roles = "USER")
+public @interface WithMockCustomUser {
+}
