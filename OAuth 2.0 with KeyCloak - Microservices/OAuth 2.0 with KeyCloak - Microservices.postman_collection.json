@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "ecbe3990-507d-41ad-b09c-4132f5f24cac",
+		"name": "OAuth 2.0 with KeyCloak - Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16645269"
+	},
+	"item": [
+		{
+			"name": "Request authentication code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/realms/appsdeveloperblog/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"appsdeveloperblog",
+						"protocol",
+						"openid-connect",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "photo-app-code-flow-client"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8083/callback"
+						},
+						{
+							"key": "state",
+							"value": "asfwerwsdfwe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exchange code for token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "photo-app-code-flow-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "WT70z8RkQcYYD50iPb4SGwcwrvXxtKCo",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "de55fa03-1c16-4bbe-a24c-fe89cf70bdb4.213b89ac-fac0-40c5-8983-870f00c2c37d.33fece02-f659-4c82-8ab5-0c8b333b87a2",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8083/callback",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/realms/appsdeveloperblog/protocol/openid-connect/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"appsdeveloperblog",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get servers's port from API Gateway",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2aHlWNllKM1RscjVROUN5SFRWZFJiWHp4T2tOVEt1VUkyZTJSSy1RY3ZzIn0.eyJleHAiOjE2NzQ0MjAyMjIsImlhdCI6MTY3NDQxOTkyMiwianRpIjoiMjVkOTY5ZTgtYWRiYi00ZTkzLTgwYzUtYTY1NDQyYzQ1N2Y1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hcHBzZGV2ZWxvcGVyYmxvZyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyNTc1NWZmMC01NTFiLTRlYjItYmU1Yi0wYmJiOGJlNzU5MjQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwaG90by1hcHAtY29kZS1mbG93LWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiIyMTJmNmYwZC1mOTQ1LTRjNmMtYjVlOC04Mzk3ZTVjNWQwZDAiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYXBwc2RldmVsb3BlcmJsb2ciLCJvZmZsaW5lX2FjY2VzcyIsImRldmVsb3BlciIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6IjIxMmY2ZjBkLWY5NDUtNGM2Yy1iNWU4LTgzOTdlNWM1ZDBkMCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkRldiBTcGVjIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2LnNwZWMiLCJnaXZlbl9uYW1lIjoiRGV2IiwiZmFtaWx5X25hbWUiOiJTcGVjIiwiZW1haWwiOiJkZXYuc3BlY0BnbWFpbC5jb20ifQ.Cnq_n10oulfdgQyiNUt9heB_5CD5ExTvns7n4rwUKSytFj0kddkX-pXPLsJSbZjIndjTjWWGQOeAj5ywa3vyxHPGhOtN7CIisbp_JoyXq-7IrXB_cmt7_1zYAB0mFJ9keg6pGY-himnQYk3PbYeGuD7rMCR8jUqgjqi1AfSb4TqHEYsnQ6BwwG4ByZvto9eRwb-lAZ-yyLsfwl47bOFadeSCUxOTNb-D977qjsEABybmKvs9ONjD-eVvSod4icL343Zgo-yJwRsnLufK47rTbM7rBMqSGQNkfuAEVJ2rKIp55Yn5Cq7_eXNuzzDG720wmtAXnfHRuCXxe96D9UjE8A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/users/status/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"users",
+						"status",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Password Grant Type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "dev.spec",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dev.spec",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "photo-app-code-flow-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "WT70z8RkQcYYD50iPb4SGwcwrvXxtKCo",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/realms/appsdeveloperblog/protocol/openid-connect/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"appsdeveloperblog",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get albums by API Gateway",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2aHlWNllKM1RscjVROUN5SFRWZFJiWHp4T2tOVEt1VUkyZTJSSy1RY3ZzIn0.eyJleHAiOjE2NzQzOTQxNzksImlhdCI6MTY3NDM5Mzg3OSwianRpIjoiMGQyNTZhNmMtNzIxZS00ZWUxLWFhMzctZjg5ZGVmMDQ2ZjY2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hcHBzZGV2ZWxvcGVyYmxvZyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyNTc1NWZmMC01NTFiLTRlYjItYmU1Yi0wYmJiOGJlNzU5MjQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwaG90by1hcHAtY29kZS1mbG93LWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiIyYWEwNzAxZS02ODhiLTQ1OTQtODNiOC02MmZkMWVkMGJlNjEiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYXBwc2RldmVsb3BlcmJsb2ciLCJvZmZsaW5lX2FjY2VzcyIsImRldmVsb3BlciIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6IjJhYTA3MDFlLTY4OGItNDU5NC04M2I4LTYyZmQxZWQwYmU2MSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkRldiBTcGVjIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2LnNwZWMiLCJnaXZlbl9uYW1lIjoiRGV2IiwiZmFtaWx5X25hbWUiOiJTcGVjIiwiZW1haWwiOiJkZXYuc3BlY0BnbWFpbC5jb20ifQ.lZrmupmrc8nJFSayZUGnJGMnwFYr177wsa2f-0Gxk5xGyFRS78A6GjjA6T6IYr16UQHIAWweAzCOJ5z6qXnfitBplRX0_kpIOl6Y8eYhDOvgLGUhVevy4xUmBXbrgHI21ZcUrAR-U2IqcGCkIXi2o6HFbVm2GSQ1djnXHuazs2ACId2NwzNCI5xs3s-np36MfjbYH-evq59imIBD1mKSOp4orAoljrW-DbrtwUvwWr6oLpanbZ_IAeEHvAZLTgV3pIZlQB3iMEkCIl1khJwm0bJ_BtrxFB0NXE3P6oNmEvW6hDfAbyP_AEriE4TbzF_sbTWZdKf5ZTl4jTm-jSWmZA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/albums",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get photos by API Gateway",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2aHlWNllKM1RscjVROUN5SFRWZFJiWHp4T2tOVEt1VUkyZTJSSy1RY3ZzIn0.eyJleHAiOjE2NzQzOTQxNzksImlhdCI6MTY3NDM5Mzg3OSwianRpIjoiMGQyNTZhNmMtNzIxZS00ZWUxLWFhMzctZjg5ZGVmMDQ2ZjY2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hcHBzZGV2ZWxvcGVyYmxvZyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyNTc1NWZmMC01NTFiLTRlYjItYmU1Yi0wYmJiOGJlNzU5MjQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwaG90by1hcHAtY29kZS1mbG93LWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiIyYWEwNzAxZS02ODhiLTQ1OTQtODNiOC02MmZkMWVkMGJlNjEiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYXBwc2RldmVsb3BlcmJsb2ciLCJvZmZsaW5lX2FjY2VzcyIsImRldmVsb3BlciIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6IjJhYTA3MDFlLTY4OGItNDU5NC04M2I4LTYyZmQxZWQwYmU2MSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkRldiBTcGVjIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2LnNwZWMiLCJnaXZlbl9uYW1lIjoiRGV2IiwiZmFtaWx5X25hbWUiOiJTcGVjIiwiZW1haWwiOiJkZXYuc3BlY0BnbWFpbC5jb20ifQ.lZrmupmrc8nJFSayZUGnJGMnwFYr177wsa2f-0Gxk5xGyFRS78A6GjjA6T6IYr16UQHIAWweAzCOJ5z6qXnfitBplRX0_kpIOl6Y8eYhDOvgLGUhVevy4xUmBXbrgHI21ZcUrAR-U2IqcGCkIXi2o6HFbVm2GSQ1djnXHuazs2ACId2NwzNCI5xs3s-np36MfjbYH-evq59imIBD1mKSOp4orAoljrW-DbrtwUvwWr6oLpanbZ_IAeEHvAZLTgV3pIZlQB3iMEkCIl1khJwm0bJ_BtrxFB0NXE3P6oNmEvW6hDfAbyP_AEriE4TbzF_sbTWZdKf5ZTl4jTm-jSWmZA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/photos",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
