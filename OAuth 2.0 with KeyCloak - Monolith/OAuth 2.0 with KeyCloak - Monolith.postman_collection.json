@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "4b7d1d15-9315-4da2-b10c-f53c1036b265",
+		"name": "OAuth 2.0 with KeyCloak - Monolith",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16645269"
+	},
+	"item": [
+		{
+			"name": "Request authentication code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/realms/appsdeveloperblog/protocol/openid-connect/auth?client_id=photo-app-code-flow-client&response_type=code&scope=openid profile&redirect_uri=http://localhost:8083/callback&state=asfwerwsdfwe",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"appsdeveloperblog",
+						"protocol",
+						"openid-connect",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "photo-app-code-flow-client"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8083/callback"
+						},
+						{
+							"key": "state",
+							"value": "asfwerwsdfwe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exchange code for token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "photo-app-code-flow-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "WT70z8RkQcYYD50iPb4SGwcwrvXxtKCo",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "de55fa03-1c16-4bbe-a24c-fe89cf70bdb4.213b89ac-fac0-40c5-8983-870f00c2c37d.33fece02-f659-4c82-8ab5-0c8b333b87a2",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8083/callback",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/realms/appsdeveloperblog/protocol/openid-connect/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"appsdeveloperblog",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tokens",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2aHlWNllKM1RscjVROUN5SFRWZFJiWHp4T2tOVEt1VUkyZTJSSy1RY3ZzIn0.eyJleHAiOjE2NzQzODczMjMsImlhdCI6MTY3NDM4NzAyMywiYXV0aF90aW1lIjoxNjc0Mzg3MDA1LCJqdGkiOiI5MjFhZGRmOC03NDFkLTRhNzktYmVkMS03NjYzMDNjZDZkYjkiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL2FwcHNkZXZlbG9wZXJibG9nIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjI1NzU1ZmYwLTU1MWItNGViMi1iZTViLTBiYmI4YmU3NTkyNCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBob3RvLWFwcC1jb2RlLWZsb3ctY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNjN2ExZTM4LWVhZWUtNDFjOS05Y2NjLWQ0ODkzNTI1ZWY0ZiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1hcHBzZGV2ZWxvcGVyYmxvZyIsIm9mZmxpbmVfYWNjZXNzIiwiZGV2ZWxvcGVyIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwic2lkIjoiY2M3YTFlMzgtZWFlZS00MWM5LTljY2MtZDQ4OTM1MjVlZjRmIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRGV2IFNwZWMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXYuc3BlYyIsImdpdmVuX25hbWUiOiJEZXYiLCJmYW1pbHlfbmFtZSI6IlNwZWMiLCJlbWFpbCI6ImRldi5zcGVjQGdtYWlsLmNvbSJ9.sqesPz5zyJZVB2Gr7mb1i7-UXD1C4_KYlF__v6pe-wVbDj_SuhEaGj41Oulcyak_DuHBbB-KNFFy54zy1FBAvUN4lqOvN3JV_A6xbqX6GAbrmP06g2YouCpcEBP06xi9Ex4IPc6VB7FZbIcz4XZuuJsTkh2ivIK8OHuiP1T9ithZ1jJ169VXSNVX1cWU9Hqb-HXd-OFCfAzAO7C5T2Db_yVmcykS_POvWW9IelrxDYYEJn2hV-cU-Z5qwur2GSXvNVJHbn4EmdfSTATP9_q5QDZm0QMEHWBxNo0qN8Aw0kt_Qzd5sGDUTbJCaH8QJ3CC49tT_OXkJvsQsvqWYB2H1A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2aHlWNllKM1RscjVROUN5SFRWZFJiWHp4T2tOVEt1VUkyZTJSSy1RY3ZzIn0.eyJleHAiOjE2NzQzODczMjMsImlhdCI6MTY3NDM4NzAyMywiYXV0aF90aW1lIjoxNjc0Mzg3MDA1LCJqdGkiOiI5MjFhZGRmOC03NDFkLTRhNzktYmVkMS03NjYzMDNjZDZkYjkiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL2FwcHNkZXZlbG9wZXJibG9nIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjI1NzU1ZmYwLTU1MWItNGViMi1iZTViLTBiYmI4YmU3NTkyNCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBob3RvLWFwcC1jb2RlLWZsb3ctY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNjN2ExZTM4LWVhZWUtNDFjOS05Y2NjLWQ0ODkzNTI1ZWY0ZiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1hcHBzZGV2ZWxvcGVyYmxvZyIsIm9mZmxpbmVfYWNjZXNzIiwiZGV2ZWxvcGVyIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwic2lkIjoiY2M3YTFlMzgtZWFlZS00MWM5LTljY2MtZDQ4OTM1MjVlZjRmIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRGV2IFNwZWMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXYuc3BlYyIsImdpdmVuX25hbWUiOiJEZXYiLCJmYW1pbHlfbmFtZSI6IlNwZWMiLCJlbWFpbCI6ImRldi5zcGVjQGdtYWlsLmNvbSJ9.sqesPz5zyJZVB2Gr7mb1i7-UXD1C4_KYlF__v6pe-wVbDj_SuhEaGj41Oulcyak_DuHBbB-KNFFy54zy1FBAvUN4lqOvN3JV_A6xbqX6GAbrmP06g2YouCpcEBP06xi9Ex4IPc6VB7FZbIcz4XZuuJsTkh2ivIK8OHuiP1T9ithZ1jJ169VXSNVX1cWU9Hqb-HXd-OFCfAzAO7C5T2Db_yVmcykS_POvWW9IelrxDYYEJn2hV-cU-Z5qwur2GSXvNVJHbn4EmdfSTATP9_q5QDZm0QMEHWBxNo0qN8Aw0kt_Qzd5sGDUTbJCaH8QJ3CC49tT_OXkJvsQsvqWYB2H1A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/users/randomValue",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"randomValue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
