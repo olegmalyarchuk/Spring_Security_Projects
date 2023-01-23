@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.keycloak;
+package com.appsdeveloperblog.keycloak.provider;
 
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;

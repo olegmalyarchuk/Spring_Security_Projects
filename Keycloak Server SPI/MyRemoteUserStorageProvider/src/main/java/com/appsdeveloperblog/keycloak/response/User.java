@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.keycloak;
+package com.appsdeveloperblog.keycloak.response;
 
 public class User {
     private String firstName;
