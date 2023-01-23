@@ -118,8 +118,5 @@ public class UserEntity implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-    
- 
-    
 
 }
