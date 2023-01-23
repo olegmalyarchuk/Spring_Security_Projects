@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-core</artifactId>
-            <version>16.1.1</version>
+            <version>20.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
@@ -46,13 +46,12 @@
     </dependencies>
 
     <build>
-        <finalName>"my-remote-mysql-user-storage-provider</finalName>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
