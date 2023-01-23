@@ -33,8 +33,8 @@ public class SpringSecurityConfiguration {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        UserDetails user = User.withUsername("sergey")
-                .password(encoder.encode("password"))
+        UserDetails user = User.withUsername("dev.spec")
+                .password(encoder.encode("dev.spec"))
                 .roles("USER")
                 .build();
 
