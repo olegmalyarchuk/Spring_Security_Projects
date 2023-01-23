@@ -1,9 +1,12 @@
 package com.appsdeveloperblog.photoapp.oauthserver;
 
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.UUID;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -22,34 +25,32 @@ import org.springframework.security.oauth2.server.authorization.config.ClientSet
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 
 @Configuration
 public class AuthorizationServerConfiguration {
 
+    @Bean
     public RegisteredClientRepository registeredClientRepository() {
 
-        RegisteredClient registeredClient = RegisteredClient
-                .withId(UUID.randomUUID().toString())
+        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client1")
                 .clientSecret("{noop}myClientSecretValue")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:8080/login/oauth2/code/users/client-oidc")
-                .redirectUri("http://localhost:8080/authorized")
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/users-client-oidc")
+                .redirectUri("http://127.0.0.1:8080/authorized")
                 .scope(OidcScopes.OPENID)
                 .scope("read")
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
         return new InMemoryRegisteredClientRepository(registeredClient);
     }
+
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -63,9 +64,10 @@ public class AuthorizationServerConfiguration {
     @Bean
     public ProviderSettings providerSettings() {
         return ProviderSettings.builder()
-                .issuer("http://localhost:8000")
+                .issuer("http://127.0.0.1:8000")
                 .build();
     }
+
 
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
@@ -97,7 +99,6 @@ public class AuthorizationServerConfiguration {
 
         return keyPairGenerator.generateKeyPair();
     }
-
 
 
 }
